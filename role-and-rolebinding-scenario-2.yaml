@@ -1,0 +1,117 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: dev-role
+rules:
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["deployments", "pods", "services"]
+  verbs: ["create", "update", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: dev-role-binding
+  namespace: dev
+roleRef:
+  kind: ClusterRole
+  name: dev-role
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: Group
+  name: dev
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: qa-role
+rules:
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["deployments", "pods", "services"]
+  verbs: ["create", "update", "delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: qa-role-binding
+  namespace: qa
+roleRef:
+  kind: ClusterRole
+  name: qa-role
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: Group
+  name: qa
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: prod-role
+rules:
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["deployments", "pods", "services"]
+  verbs: ["create", "update", "delete"]
+- apiGroups: [""]
+  resources: ["pods", "services"]
+  verbs: ["get", "watch", "list"]
+  resourceNames:
+  - frontend
+  - backend
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: prod-role-binding
+  namespace: prod
+roleRef:
+  kind: ClusterRole
+  name: prod-role
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: Group
+  name: prod
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: admin-role
+rules:
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["deployments", "pods", "services", "namespaces"]
+  verbs: ["create", "update", "delete", "get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: admin-role-binding
+roleRef:
+  kind: ClusterRole
+  name: admin-role
+  apiGroup: rbac.authorization.k8s.io
+subjects:
+- kind: Group
+  name: admin
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: viewer-role
+rules:
+- apiGroups: ["", "extensions", "apps"]
+  resources: ["deployments", "pods", "services"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: viewer-binding
+subjects:
+- kind: Group
+  name: viewer
+roleRef:
+  kind: ClusterRole
+  name: viewer-role
+  apiGroup: rbac.authorization.k8s.io
