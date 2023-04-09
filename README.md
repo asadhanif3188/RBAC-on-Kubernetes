@@ -2,7 +2,7 @@
 
 To demonstrate the working of RBAC, following scenario is considered. 
 
-## Role and RoleBinding - Scenario
+## Role and RoleBinding - Scenario 1
 You are the administrator of a Kubernetes cluster that runs a mission-critical application. You want to ensure that only authorized users are able to deploy new pods and services to the cluster. You have been asked to implement Role-Based Access Control (RBAC) to achieve this.
 
 Your task is to:
@@ -48,25 +48,33 @@ roleRef:
 
 With this configuration, the user `asad-hanif` will be able to `create` and `delete` Pods in the `default` namespace, but will not have permissions to perform any other actions on resources in that namespace.
 
+Now create Role and RoleBinding using following command:
+
+`kubectl apply -f role-and-rolebinding-scenario-1.yaml`
+
 3. Verify that the user `asad-hanif` can create and delete pods in the `default` namespace:
 
 ```
 kubectl auth can-i create pods --namespace=default --as=asad-hanif
+
 yes
 ```
 
 ```
 kubectl auth can-i delete pods --namespace=default --as=asad-hanif
+
 yes
 ```
 
 ```
 kubectl auth can-i create pods --namespace=other --as=asad-hanif
+
 no
 ```
 
 ```
 kubectl auth can-i delete pods --namespace=other --as=asad-hanif
+
 no
 ```
 
