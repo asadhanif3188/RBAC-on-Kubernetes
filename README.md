@@ -93,6 +93,15 @@ Create appropriate roles and role bindings to achieve the above access control r
 
 Follwing are the steps of solution:
 
+
+0. Create all namespaces.
+
+```
+kubectl create namespace dev
+kubectl create namespace qa
+kubectl create namespace prod
+```
+
 1. The **dev** team should be able to create, update, and delete deployments, pods, and services in the **dev** namespace.
 
 ```
@@ -100,6 +109,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: dev-role
+  namespace: dev
 rules:
 - apiGroups: ["", "extensions", "apps"]
   resources: ["deployments", "pods", "services"]
@@ -127,6 +137,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: qa-role
+  namespace: qa
 rules:
 - apiGroups: ["", "extensions", "apps"]
   resources: ["deployments", "pods", "services"]
@@ -154,6 +165,7 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: prod-role
+  namespace: prod
 rules:
 - apiGroups: ["", "extensions", "apps"]
   resources: ["deployments", "pods", "services"]
