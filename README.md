@@ -115,7 +115,7 @@ rules:
   verbs: ["create", "update", "delete"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
   name: dev-role-binding
 roleRef:
@@ -141,7 +141,7 @@ rules:
   verbs: ["create", "update", "delete"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
   name: qa-role-binding
 roleRef:
@@ -173,7 +173,7 @@ rules:
   - backend
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
   name: prod-role-binding
 roleRef:
@@ -199,7 +199,7 @@ rules:
   verbs: ["create", "update", "delete", "get", "list", "watch"]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
+kind: ClusterRoleBinding
 metadata:
   name: admin-role-binding
 roleRef:
