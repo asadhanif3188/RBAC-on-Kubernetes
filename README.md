@@ -109,7 +109,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: dev-role
-  namespace: dev
 rules:
 - apiGroups: ["", "extensions", "apps"]
   resources: ["deployments", "pods", "services"]
@@ -119,7 +118,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: dev-role-binding
-  namespace: dev
 roleRef:
   kind: ClusterRole
   name: dev-role
@@ -137,7 +135,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: qa-role
-  namespace: qa
 rules:
 - apiGroups: ["", "extensions", "apps"]
   resources: ["deployments", "pods", "services"]
@@ -147,7 +144,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: qa-role-binding
-  namespace: qa
 roleRef:
   kind: ClusterRole
   name: qa-role
@@ -165,7 +161,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: prod-role
-  namespace: prod
 rules:
 - apiGroups: ["", "extensions", "apps"]
   resources: ["deployments", "pods", "services"]
@@ -181,7 +176,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
   name: prod-role-binding
-  namespace: prod
 roleRef:
   kind: ClusterRole
   name: prod-role
